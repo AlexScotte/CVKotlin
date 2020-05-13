@@ -7,8 +7,12 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import fr.ascotte.cv.kotlin.data.remote.RemoteDataProvider
 
 class MainActivity : AppCompatActivity() {
+
+    private val dataProvider: RemoteDataProvider =
+        RemoteDataProvider(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
