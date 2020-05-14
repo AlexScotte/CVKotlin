@@ -1,18 +1,19 @@
 package fr.ascotte.cv.kotlin
 
 import android.os.Bundle
+import android.provider.ContactsContract
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import fr.ascotte.cv.kotlin.data.DataManager
 import fr.ascotte.cv.kotlin.data.remote.RemoteDataProvider
 
 class MainActivity : AppCompatActivity() {
 
-    private val dataProvider: RemoteDataProvider =
-        RemoteDataProvider(this)
+    private lateinit var dataManager: DataManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,5 +27,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        this.dataManager = DataManager(this)
     }
 }
