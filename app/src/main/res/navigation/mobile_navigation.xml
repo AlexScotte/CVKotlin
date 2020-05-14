@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="fr.ascotte.cv.kotlin.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:name="fr.ascotte.cv.kotlin.ui.experiences.ExperiencesFragment"
+        android:label="@string/title_experiences"
+        tools:layout="@layout/fragment_experiences" />
 
     <fragment
         android:id="@+id/navigation_notifications"
