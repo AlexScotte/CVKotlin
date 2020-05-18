@@ -5,11 +5,19 @@ import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
 import java.io.Serializable
 
-data class Company(val id:Int = 0, val name:String = "", val department:String = "", val town:String = "") : Serializable{
+data class Company(
+        val id:Int = 0,
+        var dateStart:String = "",
+        var dateEnd:String ="",
+        val name:String = "",
+        val department:String = "",
+        val town:String = "") : Serializable{
 
     constructor(realmCompany: RealmCompany): this(
 
             realmCompany.id,
+            realmCompany.dateStart,
+            realmCompany.dateEnd,
             realmCompany.name,
             realmCompany.department,
             realmCompany.town
@@ -17,12 +25,22 @@ data class Company(val id:Int = 0, val name:String = "", val department:String =
 }
 
 @RealmClass
-open class RealmCompany(@PrimaryKey var id:Int = 0, var name:String = "", var department:String = "", var town:String = "") : RealmObject() {
+open class RealmCompany(
+        @PrimaryKey var id:Int = 0,
+        var dateStart:String = "",
+        var dateEnd:String ="",
+        var name:String = "",
+        var department:String = "",
+        var town:String = "")
+    : RealmObject() {
 
     constructor(company: Company) : this(
 
-        company.id,
-        company.department,
-        company.town
+            company.id,
+            company.dateStart,
+            company.dateEnd,
+            company.name,
+            company.department,
+            company.town
     )
 }

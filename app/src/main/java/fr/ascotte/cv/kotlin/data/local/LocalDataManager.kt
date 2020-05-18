@@ -45,7 +45,7 @@ class LocalDataManager {
 
     fun getExperiences() : List<Experience>{
 
-        val realmObj = realm.where(RealmExperience::class.java).findAll().map(){
+        val realmObj = realm.where(RealmExperience::class.java).findAll().map{
             realmExperience -> Experience(realmExperience)
         }
         if(realmObj == null)
@@ -54,6 +54,16 @@ class LocalDataManager {
             return realmObj
     }
 
+    fun getCompetences() : List<Competence>{
+
+        val realmObj = realm.where(RealmCompetence::class.java).findAll().map{
+            realmCompetence -> Competence(realmCompetence)
+        }
+        if(realmObj == null)
+            return listOf()
+        else
+            return realmObj
+    }
 
     fun createClients(clients: List<Client>) {
 
@@ -84,6 +94,17 @@ class LocalDataManager {
         for(experience in experiences){
 
             var realmObj = RealmExperience(experience)
+            realm.copyToRealm(realmObj)
+        }
+        realm.commitTransaction()
+    }
+
+    fun createCompetences(competences: List<Competence>) {
+
+        realm.beginTransaction()
+        for(competence in competences){
+
+            var realmObj = RealmCompetence(competence)
             realm.copyToRealm(realmObj)
         }
         realm.commitTransaction()

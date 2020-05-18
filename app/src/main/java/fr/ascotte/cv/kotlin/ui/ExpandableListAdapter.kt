@@ -8,11 +8,13 @@ import android.widget.BaseExpandableListAdapter
 import android.widget.ExpandableListView
 import androidx.recyclerview.widget.RecyclerView
 import fr.ascotte.cv.kotlin.R
+import fr.ascotte.cv.kotlin.data.`object`.Client
+import fr.ascotte.cv.kotlin.data.`object`.Company
 import kotlinx.android.synthetic.main.list_header.view.*
 import kotlinx.android.synthetic.main.list_item.view.*
 
 
-class ExpandableListAdapter (val context:Context, val listOfHeaderData: List<String>, val listOfChildData: HashMap<String, List<String>>) : BaseExpandableListAdapter() {
+class ExpandableListAdapter (val context:Context, val listOfHeaderData: List<Company>, val listOfChildData: HashMap<Company, List<Client>>) : BaseExpandableListAdapter() {
 
     override fun getGroup(groupPosition: Int): Any {
 
@@ -31,10 +33,10 @@ class ExpandableListAdapter (val context:Context, val listOfHeaderData: List<Str
 
     override fun getGroupView(groupPosition: Int, isExpanded: Boolean, convertView: View?, parent: ViewGroup?): View {
 
-        val headerTitle = getGroup(groupPosition) as String
+        val company = getGroup(groupPosition) as Company
         val rootView = LayoutInflater.from(context).inflate(R.layout.list_header, parent, false)
         val viewHolder = HeaderViewHolder(rootView)
-        viewHolder.fillItem(headerTitle)
+        viewHolder.fillGroup(company)
 
         return rootView
     }
@@ -53,7 +55,7 @@ class ExpandableListAdapter (val context:Context, val listOfHeaderData: List<Str
     }
 
     override fun getChildView(groupPosition: Int, childPosition: Int, isLastChild: Boolean, convertView: View?, parent: ViewGroup?): View {
-        val headerTitle = getChild(groupPosition, childPosition) as String
+        val headerTitle = getChild(groupPosition, childPosition) as Client
         val rootView = LayoutInflater.from(context).inflate(R.layout.list_item, parent, false)
         val viewHolder = ChildViewHolder(rootView)
         viewHolder.fillItem(headerTitle)
@@ -79,19 +81,10 @@ class ExpandableListAdapter (val context:Context, val listOfHeaderData: List<Str
             //rootView.setOnClickListener(this)
         }
 
-        fun fillItem(title:String){
+        fun fillGroup(company: Company){
 
-            ui_title_text.text = title
+            ui_title_text.text = company.name
         }
-
-//        override fun onClick(v: View?) {
-//            super.onClick
-//        }
-
-//        override fun onClick(v: View?) {
-//           // if(v != null)
-//               // onItemClickedAtIndex(adapterPosition)
-//        }
     }
 
     inner class ChildViewHolder(rootView: View) : RecyclerView.ViewHolder(rootView), View.OnClickListener {
@@ -103,9 +96,9 @@ class ExpandableListAdapter (val context:Context, val listOfHeaderData: List<Str
             rootView.setOnClickListener(this)
         }
 
-        fun fillItem(title:String){
+        fun fillItem(client: Client){
 
-            ui_child_title.text = title
+            ui_child_title.text = client.name
         }
 
         override fun onClick(v: View?) {

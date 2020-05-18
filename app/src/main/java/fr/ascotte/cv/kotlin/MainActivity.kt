@@ -56,14 +56,16 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private fun prepareExperiencesArgs() : Bundle {
 
         val bundle = Bundle()
-        val clients = dataManager.localDataManager.getClients()
         val companies = dataManager.localDataManager.getCompanies()
+        val clients = dataManager.localDataManager.getClients()
         val experiences = dataManager.localDataManager.getExperiences()
+        val competences = dataManager.localDataManager.getCompetences()
 
-        var json = Gson().toJson(clients)
-        bundle.putString("clientList", json)
-        json = Gson().toJson(companies)
+
+        var json = Gson().toJson(companies)
         bundle.putString("companyList", json)
+        json = Gson().toJson(clients)
+        bundle.putString("clientList", json)
         json = Gson().toJson(experiences)
         bundle.putString("experienceList", json)
 

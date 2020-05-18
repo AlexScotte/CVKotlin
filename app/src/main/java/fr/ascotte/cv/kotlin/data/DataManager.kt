@@ -86,6 +86,11 @@ class DataManager(context: Context) {
             localDataManager.createExperiences(experiences)
         }
 
+        dataProvider.getRemoteCompetences {competences ->
+
+            localDataManager.createCompetences(competences)
+        }
+
         dataProvider.getDatabaseInformations {informations ->
 
             localDataManager.createInformations(informations)

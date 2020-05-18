@@ -10,9 +10,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 import fr.ascotte.cv.kotlin.R
-import fr.ascotte.cv.kotlin.data.`object`.RealmClient
-import fr.ascotte.cv.kotlin.data.`object`.RealmCompany
-import fr.ascotte.cv.kotlin.data.`object`.RealmExperience
+import fr.ascotte.cv.kotlin.data.`object`.*
 import fr.ascotte.cv.kotlin.extensions.fromJson
 import fr.ascotte.cv.kotlin.ui.ExpandableListAdapter
 import io.realm.Realm
@@ -22,9 +20,9 @@ class ExperiencesFragment : Fragment() {
 
     val args : ExperiencesFragmentArgs by navArgs()
 
-    var clients:List<RealmClient> = listOf()
-    var companies:List<RealmCompany> = listOf()
-    var experiences:List<RealmExperience> = listOf()
+    var clients:List<Client> = listOf()
+    var companies:List<Company> = listOf()
+    var experiences:List<Experience> = listOf()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -38,17 +36,12 @@ class ExperiencesFragment : Fragment() {
 
         this.getData()
 
-        var listHeader = listOf("111", "22222", "333333")
-        var child1 = listOf("1", "11", "111", "11111")
-        var child2 = listOf("2", "22", "222", "22222")
-        var child3 = listOf("3", "33", "333", "33333")
+        val hasMap = HashMap<Company, List<Client>>()
+        hasMap.put(companies[0], clients)
+        hasMap.put(companies[1], clients)
+        hasMap.put(companies[2], clients)
 
-        val dict = HashMap<String, List<String>>()
-        dict.put(listHeader[0], child1)
-        dict.put(listHeader[1], child2)
-        dict.put(listHeader[2], child3)
-
-        val adapter = ExpandableListAdapter(view.context, listHeader, dict)
+        val adapter = ExpandableListAdapter(view.context, companies, hasMap)
         ui_expandable_list.setAdapter(adapter)
 
         // Expand group at the beginning
@@ -58,8 +51,8 @@ class ExperiencesFragment : Fragment() {
 
     private fun getData() {
 
-        clients = Gson().fromJson(args.clientList)
         companies = Gson().fromJson(args.companyList)
+        clients = Gson().fromJson(args.clientList)
         experiences = Gson().fromJson(args.experienceList)
     }
 }

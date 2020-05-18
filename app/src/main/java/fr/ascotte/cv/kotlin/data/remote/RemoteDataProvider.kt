@@ -5,16 +5,14 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import fr.ascotte.cv.kotlin.data.`object`.Client
-import fr.ascotte.cv.kotlin.data.`object`.Company
-import fr.ascotte.cv.kotlin.data.`object`.Experience
-import fr.ascotte.cv.kotlin.data.`object`.Informations
+import fr.ascotte.cv.kotlin.data.`object`.*
 
 class RemoteDataProvider(context:Context) {
 
     private var clients = mutableListOf<Client>()
     private var companies = mutableListOf<Company>()
     private var experiences = mutableListOf<Experience>()
+    private var competences = mutableListOf<Competence>()
     private var informations: Informations? = null
 
     init {
@@ -94,6 +92,26 @@ class RemoteDataProvider(context:Context) {
                     experiences.add(experience!!)
                 }
                 resultHandler(experiences)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                throw databaseError.toException()
+            }
+        })
+    }
+
+    fun getRemoteCompetences(resultHandler: (List<Competence>) -> Unit) {
+
+        var ref = FirebaseDatabase.getInstance().getReference("competences")
+        ref.addValueEventListener(object : ValueEventListener {
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                for (snapshot in dataSnapshot.children) {
+                    val competence = snapshot.getValue(Competence::class.java)
+                    competences.add(competence!!)
+                }
+                resultHandler(competences)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
