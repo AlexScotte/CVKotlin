@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import android.widget.ExpandableListView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.Chip
 import fr.ascotte.cv.kotlin.R
 import fr.ascotte.cv.kotlin.data.`object`.Client
 import fr.ascotte.cv.kotlin.data.`object`.Company
@@ -55,10 +56,12 @@ class ExpandableListAdapter (val context:Context, val listOfHeaderData: List<Com
     }
 
     override fun getChildView(groupPosition: Int, childPosition: Int, isLastChild: Boolean, convertView: View?, parent: ViewGroup?): View {
-        val headerTitle = getChild(groupPosition, childPosition) as Client
+
+        val group = getGroup(groupPosition) as Company
+        val item = getChild(groupPosition, childPosition) as Client
         val rootView = LayoutInflater.from(context).inflate(R.layout.list_item, parent, false)
         val viewHolder = ChildViewHolder(rootView)
-        viewHolder.fillItem(headerTitle)
+        viewHolder.fillItem(group, item)
         return rootView
     }
 
@@ -75,30 +78,52 @@ class ExpandableListAdapter (val context:Context, val listOfHeaderData: List<Com
     inner class HeaderViewHolder(rootView: View) : RecyclerView.ViewHolder(rootView) {
 
         private val ui_title_text = rootView.ui_title_text
-
-        init{
-
-            //rootView.setOnClickListener(this)
-        }
+        private val ui_subtitle_text = rootView.ui_subtitle_text
 
         fun fillGroup(company: Company){
 
-            ui_title_text.text = company.name
+            val title = "${company.job} @ ${company.name}"
+            ui_title_text.text = title
+
+            val subtitle = "${company.dateStart} - ${company.dateEnd}"
+            ui_subtitle_text.text  = subtitle
         }
     }
 
     inner class ChildViewHolder(rootView: View) : RecyclerView.ViewHolder(rootView), View.OnClickListener {
 
         private val ui_child_title = rootView.ui_child_title
+        private val ui_child_subtitle = rootView.ui_child_subtitle
+        private val ui_chipGroup = rootView.ui_chipGroup
 
         init{
 
             rootView.setOnClickListener(this)
         }
 
-        fun fillItem(client: Client){
+        fun fillItem(company: Company, client: Client){
 
-            ui_child_title.text = client.name
+            val title = "${client.name}"
+            ui_child_title.text = title
+
+            var duration:String = ""
+            if(!client.experience?.duration.isNullOrEmpty())
+                duration = "(${client.experience?.duration})"
+
+            val subtitle =  "${client.experience?.job} $duration"
+            ui_child_subtitle.text = subtitle
+
+            if(client.experience != null){
+
+                for (comp in client.experience!!.competences){
+
+                    val chip = Chip(ui_chipGroup.context)
+                    chip.text = comp.name
+                    chip.isClickable = false
+                    chip.isCheckable = false
+                    ui_chipGroup.addView(chip)
+                }
+            }
         }
 
         override fun onClick(v: View?) {

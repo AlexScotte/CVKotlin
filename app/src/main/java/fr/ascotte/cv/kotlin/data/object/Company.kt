@@ -7,11 +7,14 @@ import java.io.Serializable
 
 data class Company(
         val id:Int = 0,
-        var dateStart:String = "",
-        var dateEnd:String ="",
+        val dateStart:String = "",
+        val dateEnd:String ="",
         val name:String = "",
+        val job:String = "",
         val department:String = "",
         val town:String = "") : Serializable{
+
+    var clients:List<Client> = listOf()
 
     constructor(realmCompany: RealmCompany): this(
 
@@ -19,6 +22,7 @@ data class Company(
             realmCompany.dateStart,
             realmCompany.dateEnd,
             realmCompany.name,
+            realmCompany.job,
             realmCompany.department,
             realmCompany.town
     )
@@ -30,6 +34,7 @@ open class RealmCompany(
         var dateStart:String = "",
         var dateEnd:String ="",
         var name:String = "",
+        var job:String = "",
         var department:String = "",
         var town:String = "")
     : RealmObject() {
@@ -40,6 +45,7 @@ open class RealmCompany(
             company.dateStart,
             company.dateEnd,
             company.name,
+            company.job,
             company.department,
             company.town
     )

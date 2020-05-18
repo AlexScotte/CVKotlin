@@ -23,6 +23,7 @@ class ExperiencesFragment : Fragment() {
     var clients:List<Client> = listOf()
     var companies:List<Company> = listOf()
     var experiences:List<Experience> = listOf()
+    var competences:List<Competence> = listOf()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -37,9 +38,11 @@ class ExperiencesFragment : Fragment() {
         this.getData()
 
         val hasMap = HashMap<Company, List<Client>>()
-        hasMap.put(companies[0], clients)
-        hasMap.put(companies[1], clients)
-        hasMap.put(companies[2], clients)
+
+        for (company in companies){
+
+            hasMap.put(company, company.clients)
+        }
 
         val adapter = ExpandableListAdapter(view.context, companies, hasMap)
         ui_expandable_list.setAdapter(adapter)
@@ -54,5 +57,22 @@ class ExperiencesFragment : Fragment() {
         companies = Gson().fromJson(args.companyList)
         clients = Gson().fromJson(args.clientList)
         experiences = Gson().fromJson(args.experienceList)
+        competences = Gson().fromJson(args.competenceList)
+
+
+        for(company in companies) {
+
+            for (client in clients) {
+
+                for (xp in experiences) {
+
+                    xp.competences = competences.filter { c -> xp.id == c.idExperience }
+                }
+
+                client.experience = experiences.find{ e -> client.id == e.idClient }
+            }
+
+            company.clients = clients.filter { c -> company.id   == c.idCompany }
+        }
     }
 }

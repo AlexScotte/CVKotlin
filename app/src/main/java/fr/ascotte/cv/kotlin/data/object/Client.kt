@@ -13,6 +13,8 @@ data class Client(
         val site:String = "")
     : Serializable{
 
+    var experience:Experience? = null
+
     constructor(realmClient: RealmClient):this(
 
             realmClient.id,
