@@ -12,10 +12,22 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_experiences"
         android:name="fr.ascotte.cv.kotlin.ui.experiences.ExperiencesFragment"
         android:label="@string/title_experiences"
-        tools:layout="@layout/fragment_experiences" />
+        tools:layout="@layout/fragment_experiences" >
+        <argument
+            android:name="companyList"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="clientList"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument android:name="experienceList"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"

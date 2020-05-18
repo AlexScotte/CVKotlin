@@ -2,18 +2,13 @@ package fr.ascotte.cv.kotlin.data.local
 
 import fr.ascotte.cv.kotlin.data.`object`.*
 import io.realm.Realm
+import io.realm.RealmResults
 
 class LocalDataManager {
 
     private val realm: Realm = Realm.getDefaultInstance()
 
-
     init {
-
-        // check version local
-
-
-//        return realm.where(LocalShowFavorite::class.java).equalTo("id", show.id).count() > 0
 
         getLocalDatabaseVersion()
     }
@@ -24,6 +19,42 @@ class LocalDataManager {
         return informations?.version
     }
 
+    fun getClients() : List<Client>{
+
+        val realmObj = realm.where(RealmClient::class.java).findAll().map {
+            realmClient -> Client(realmClient)
+        }
+
+        if(realmObj == null)
+            return listOf()
+        else
+            return realmObj
+    }
+
+    fun getCompanies() : List<Company>{
+
+        val realmObj = realm.where(RealmCompany::class.java).findAll().map {
+            realmCompany -> Company(realmCompany)
+        }
+
+        if(realmObj == null)
+            return listOf()
+        else
+            return realmObj
+    }
+
+    fun getExperiences() : List<Experience>{
+
+        val realmObj = realm.where(RealmExperience::class.java).findAll().map(){
+            realmExperience -> Experience(realmExperience)
+        }
+        if(realmObj == null)
+            return listOf()
+        else
+            return realmObj
+    }
+
+
     fun createClients(clients: List<Client>) {
 
         realm.beginTransaction()
@@ -33,6 +64,7 @@ class LocalDataManager {
             realm.copyToRealm(realmObj)
         }
          realm.commitTransaction()
+        this.getClients()
     }
 
     fun createCompanies(companies: List<Company>) {
@@ -64,4 +96,5 @@ class LocalDataManager {
         realm.copyToRealm(realmObj)
         realm.commitTransaction()
     }
+
 }

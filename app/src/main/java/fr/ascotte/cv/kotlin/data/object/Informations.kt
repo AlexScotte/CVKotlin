@@ -4,12 +4,15 @@ import io.realm.RealmObject
 import io.realm.annotations.RealmClass
 import java.io.Serializable
 
-data class Informations(val version:Float = 0f) : Serializable
+data class Informations(val version:Float = 0f) : Serializable{
+
+    constructor(realmInformations: RealmInformations) : this(
+            realmInformations.version
+    )
+}
 
 @RealmClass
-open class RealmInformations() : RealmObject() {
-
-    var version:Float = 0F
+open class RealmInformations(var version:Float = 0f) : RealmObject() {
 
     constructor(informations: Informations) : this() {
 

@@ -6,14 +6,18 @@ import io.realm.annotations.RealmClass
 import java.io.Serializable
 
 
-data class Client(val id:Int = 0, val name:String = "", val site:String = "") : Serializable
+data class Client(val id:Int = 0, val name:String = "", val site:String = "") : Serializable{
+
+    constructor(realmClient: RealmClient):this(
+
+            realmClient.id,
+            realmClient.name,
+            realmClient.site
+    )
+}
 
 @RealmClass
-open class RealmClient() : RealmObject() {
-
-    @PrimaryKey var id = 0
-    var name=""
-    var site=""
+open class RealmClient(@PrimaryKey var id:Int = 0, var name:String = "", var site:String = "") : RealmObject(){
 
     constructor(client: Client) : this() {
 

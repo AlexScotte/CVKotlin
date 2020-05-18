@@ -10,8 +10,8 @@ import fr.ascotte.cv.kotlin.data.remote.RemoteDataProvider
 
 class DataManager(context: Context) {
 
-    private val localDataManager:LocalDataManager = LocalDataManager()
-    private val dataProvider:RemoteDataProvider = RemoteDataProvider(context)
+    val localDataManager:LocalDataManager = LocalDataManager()
+    val dataProvider:RemoteDataProvider = RemoteDataProvider(context)
 
     init {
 

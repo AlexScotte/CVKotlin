@@ -36,9 +36,6 @@ class ExpandableListAdapter (val context:Context, val listOfHeaderData: List<Str
         val viewHolder = HeaderViewHolder(rootView)
         viewHolder.fillItem(headerTitle)
 
-        // Expand groupview at the beginning
-        val mExpandableListView = parent as ExpandableListView
-        mExpandableListView.expandGroup(groupPosition)
         return rootView
     }
 

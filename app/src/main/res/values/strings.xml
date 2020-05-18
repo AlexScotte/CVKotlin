@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">CVKotlin</string>
     <string name="title_home">Profil</string>
-    <string name="title_dashboard">Experiences</string>
     <string name="title_notifications">Contact</string>
     <string name="title_experiences">Experiences</string>
 </resources>
