@@ -11,6 +11,8 @@ data class Experience(
         val job:String = "",
         val duration:String = "") : Serializable{
 
+    var competences:List<Competence> = listOf()
+
     constructor(realmExperience: RealmExperience) : this(
             realmExperience.id,
             realmExperience.idClient,
