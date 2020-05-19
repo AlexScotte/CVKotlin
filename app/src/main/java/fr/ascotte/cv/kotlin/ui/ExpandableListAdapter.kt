@@ -2,6 +2,7 @@ package fr.ascotte.cv.kotlin.ui
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.TouchDelegate
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
@@ -15,7 +16,11 @@ import kotlinx.android.synthetic.main.list_header.view.*
 import kotlinx.android.synthetic.main.list_item.view.*
 
 
-class ExpandableListAdapter (val context:Context, val listOfHeaderData: List<Company>, val listOfChildData: HashMap<Company, List<Client>>) : BaseExpandableListAdapter() {
+class ExpandableListAdapter (val delegate: Delegate, val context:Context, val listOfHeaderData: List<Company>, val listOfChildData: HashMap<Company, List<Client>>) : BaseExpandableListAdapter() {
+
+    interface Delegate{
+        fun experienceClicked(company: Company, client: Client)
+    }
 
     override fun getGroup(groupPosition: Int): Any {
 
@@ -62,6 +67,12 @@ class ExpandableListAdapter (val context:Context, val listOfHeaderData: List<Com
         val rootView = LayoutInflater.from(context).inflate(R.layout.list_item, parent, false)
         val viewHolder = ChildViewHolder(rootView)
         viewHolder.fillItem(group, item)
+
+        rootView.setOnClickListener{v ->
+
+            delegate.experienceClicked(group, item)
+        }
+
         return rootView
     }
 
@@ -90,16 +101,11 @@ class ExpandableListAdapter (val context:Context, val listOfHeaderData: List<Com
         }
     }
 
-    inner class ChildViewHolder(rootView: View) : RecyclerView.ViewHolder(rootView), View.OnClickListener {
+    inner class ChildViewHolder(rootView: View) : RecyclerView.ViewHolder(rootView) {
 
         private val ui_child_title = rootView.ui_child_title
         private val ui_child_subtitle = rootView.ui_child_subtitle
         private val ui_chipGroup = rootView.ui_chipGroup
-
-        init{
-
-            rootView.setOnClickListener(this)
-        }
 
         fun fillItem(company: Company, client: Client){
 
@@ -124,11 +130,6 @@ class ExpandableListAdapter (val context:Context, val listOfHeaderData: List<Com
                     ui_chipGroup.addView(chip)
                 }
             }
-        }
-
-        override fun onClick(v: View?) {
-            // if(v != null)
-            // onItemClickedAtIndex(adapterPosition)
         }
     }
 }
