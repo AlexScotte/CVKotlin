@@ -10,7 +10,8 @@ data class Client(
         val id:Int = 0,
         val idCompany:Int = 0,
         val name:String = "",
-        val site:String = "")
+        val site:String = "",
+        val imageUrl:String="")
     : Serializable{
 
     var experience:Experience? = null
@@ -20,7 +21,8 @@ data class Client(
             realmClient.id,
             realmClient.idCompany,
             realmClient.name,
-            realmClient.site
+            realmClient.site,
+            realmClient.imageUrl
     )
 }
 
@@ -29,14 +31,16 @@ open class RealmClient(
         @PrimaryKey var id:Int = 0,
         var idCompany:Int = 0,
         var name:String = "",
-        var site:String = "")
+        var site:String = "",
+        var imageUrl:String="")
     : RealmObject(){
 
     constructor(client: Client) : this(
 
-        client.id,
-        client.idCompany,
-        client.name,
-        client.site
+            client.id,
+            client.idCompany,
+            client.name,
+            client.site,
+            client.imageUrl
     )
 }

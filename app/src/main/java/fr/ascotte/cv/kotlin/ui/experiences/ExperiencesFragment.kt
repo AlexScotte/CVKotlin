@@ -81,6 +81,9 @@ class ExperiencesFragment : Fragment(), ExpandableListAdapter.Delegate {
 
     override fun experienceClicked(company: Company, client: Client) {
 
-
+        val intent = Intent(activity, ExperienceDetailsActivity::class.java)
+        intent.putExtra("company", company)
+        intent.putExtra("client", client)
+        startActivity(intent)
     }
 }

@@ -3,4 +3,7 @@
     <string name="title_home">Profil</string>
     <string name="title_notifications">Contact</string>
     <string name="title_experiences">Experiences</string>
+    <string name="xp_details_context">Contexte :</string>
+    <string name="xp_details_mission">Missions :</string>
+    <string name="xp_details_skills">Compétences :</string>
 </resources>
