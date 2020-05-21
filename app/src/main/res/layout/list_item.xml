@@ -7,6 +7,15 @@
     android:layout_height="match_parent">
 
 
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="18dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/ui_chipGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/ui_child_title"
         android:layout_width="0dp"
@@ -19,8 +28,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/ui_child_subtitle"

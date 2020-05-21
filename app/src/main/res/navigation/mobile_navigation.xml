@@ -27,9 +27,6 @@
         <argument android:name="experienceList"
             app:argType="string"
             android:defaultValue='""' />
-        <argument
-            android:name="competenceList"
-            android:defaultValue='""' />
     </fragment>
 
     <fragment
