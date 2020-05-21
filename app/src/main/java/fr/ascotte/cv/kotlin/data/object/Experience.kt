@@ -1,5 +1,6 @@
 package fr.ascotte.cv.kotlin.data.`object`
 
+import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
@@ -9,9 +10,9 @@ data class Experience(
         val id:Int = 0,
         val idClient: Int = 0,
         val job:String = "",
-        val duration:String = "") : Serializable{
-
-    var competences:List<Competence> = listOf()
+        val duration:String = "",
+        var skills:ArrayList<Competence> = ArrayList()
+        ) : Serializable{
 
     constructor(realmExperience: RealmExperience) : this(
             realmExperience.id,
@@ -26,13 +27,14 @@ open class RealmExperience(
         @PrimaryKey var id:Int = 0,
         var idClient: Int = 0,
         var job:String = "",
-        var duration: String="") : RealmObject(){
+        var duration: String="",
+        var skills:RealmList<RealmCompetence> = RealmList()) : RealmObject(){
 
-    constructor(experience: Experience) : this() {
+    constructor(experience: Experience) : this(
 
-        this.id = experience.id
-        this.idClient = experience.idClient
-        this.job = experience.job
-        this.duration = experience.duration
-    }
+        experience.id,
+        experience.idClient,
+        experience.job,
+        experience.duration
+    )
 }

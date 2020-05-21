@@ -121,7 +121,7 @@ class ExpandableListAdapter (val delegate: Delegate, val context:Context, val li
 
             if(client.experience != null){
 
-                for (comp in client.experience!!.competences){
+                for (comp in client.experience!!.skills.filter { s -> s.important == 1 }){
 
                     val chip = Chip(ui_chipGroup.context)
                     chip.text = comp.name

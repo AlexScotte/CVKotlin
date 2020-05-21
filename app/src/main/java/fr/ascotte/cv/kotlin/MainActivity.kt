@@ -59,8 +59,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         val companies = dataManager.localDataManager.getCompanies().sortedByDescending { it.id }
         val clients = dataManager.localDataManager.getClients().sortedByDescending { it.id }
         val experiences = dataManager.localDataManager.getExperiences().sortedByDescending { it.id }
-        val competences = dataManager.localDataManager.getCompetences().sortedByDescending { it.id }
-
 
         var json = Gson().toJson(companies)
         bundle.putString("companyList", json)
@@ -68,8 +66,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         bundle.putString("clientList", json)
         json = Gson().toJson(experiences)
         bundle.putString("experienceList", json)
-        json = Gson().toJson(competences)
-        bundle.putString("competenceList", json)
 
         return bundle
     }

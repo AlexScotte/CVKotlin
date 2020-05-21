@@ -26,7 +26,6 @@ class ExperiencesFragment : Fragment(), ExpandableListAdapter.Delegate {
     var clients:List<Client> = listOf()
     var companies:List<Company> = listOf()
     var experiences:List<Experience> = listOf()
-    var competences:List<Competence> = listOf()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -60,17 +59,10 @@ class ExperiencesFragment : Fragment(), ExpandableListAdapter.Delegate {
         companies = Gson().fromJson(args.companyList)
         clients = Gson().fromJson(args.clientList)
         experiences = Gson().fromJson(args.experienceList)
-        competences = Gson().fromJson(args.competenceList)
-
 
         for(company in companies) {
 
             for (client in clients) {
-
-                for (xp in experiences) {
-
-                    xp.competences = competences.filter { c -> xp.id == c.idExperience }
-                }
 
                 client.experience = experiences.find{ e -> client.id == e.idClient }
             }

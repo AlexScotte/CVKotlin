@@ -99,24 +99,4 @@ class RemoteDataProvider(context:Context) {
             }
         })
     }
-
-    fun getRemoteCompetences(resultHandler: (List<Competence>) -> Unit) {
-
-        var ref = FirebaseDatabase.getInstance().getReference("competences")
-        ref.addValueEventListener(object : ValueEventListener {
-
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                for (snapshot in dataSnapshot.children) {
-                    val competence = snapshot.getValue(Competence::class.java)
-                    competences.add(competence!!)
-                }
-                resultHandler(competences)
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                throw databaseError.toException()
-            }
-        })
-    }
 }

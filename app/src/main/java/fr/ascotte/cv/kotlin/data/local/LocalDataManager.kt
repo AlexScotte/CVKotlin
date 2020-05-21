@@ -2,6 +2,7 @@ package fr.ascotte.cv.kotlin.data.local
 
 import fr.ascotte.cv.kotlin.data.`object`.*
 import io.realm.Realm
+import io.realm.RealmList
 import io.realm.RealmResults
 
 class LocalDataManager {
@@ -45,24 +46,21 @@ class LocalDataManager {
 
     fun getExperiences() : List<Experience>{
 
-        val realmObj = realm.where(RealmExperience::class.java).findAll().map{
-            realmExperience -> Experience(realmExperience)
-        }
-        if(realmObj == null)
-            return listOf()
-        else
-            return realmObj
-    }
+        val realmObjects = realm.where(RealmExperience::class.java).findAll()
 
-    fun getCompetences() : List<Competence>{
+        var experiences:MutableList<Experience> = mutableListOf()
+        for (realmObj in realmObjects){
 
-        val realmObj = realm.where(RealmCompetence::class.java).findAll().map{
-            realmCompetence -> Competence(realmCompetence)
+            val xp = Experience(realmObj)
+            for(skill in realmObj.skills.toList()){
+
+                val comp = Competence(skill)
+                xp.skills.add(comp)
+            }
+            experiences.add(xp)
         }
-        if(realmObj == null)
-            return listOf()
-        else
-            return realmObj
+
+        return experiences
     }
 
     fun createClients(clients: List<Client>) {
@@ -94,17 +92,15 @@ class LocalDataManager {
         for(experience in experiences){
 
             var realmObj = RealmExperience(experience)
-            realm.copyToRealm(realmObj)
-        }
-        realm.commitTransaction()
-    }
 
-    fun createCompetences(competences: List<Competence>) {
+            var realmList:RealmList<RealmCompetence> = RealmList()
+            for (skill in experience.skills){
 
-        realm.beginTransaction()
-        for(competence in competences){
+                var realmObject = RealmCompetence(skill)
+                realmList.add(realmObject)
+            }
+            realmObj.skills = realmList
 
-            var realmObj = RealmCompetence(competence)
             realm.copyToRealm(realmObj)
         }
         realm.commitTransaction()
