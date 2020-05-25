@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_profile">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="fr.ascotte.cv.kotlin.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_profile"
+        android:name="fr.ascotte.cv.kotlin.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/navigation_experiences"
@@ -30,8 +30,14 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="fr.ascotte.cv.kotlin.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_formation"
+        android:name="fr.ascotte.cv.kotlin.ui.formation.FormationFragment"
+        android:label="@string/title_formation"
+        tools:layout="@layout/fragment_formation" />
+
+    <fragment
+        android:id="@+id/navigation_contact"
+        android:name="fr.ascotte.cv.kotlin.ui.contact.ContactFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_contact" />
 </navigation>
