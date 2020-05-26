@@ -20,13 +20,6 @@
             android:name="companyList"
             app:argType="string"
             android:defaultValue='""' />
-        <argument
-            android:name="clientList"
-            app:argType="string"
-            android:defaultValue='""' />
-        <argument android:name="experienceList"
-            app:argType="string"
-            android:defaultValue='""' />
     </fragment>
 
     <fragment

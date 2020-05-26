@@ -22,11 +22,7 @@ import kotlinx.android.synthetic.main.fragment_experiences.*
 class ExperiencesFragment : Fragment(), ExpandableListAdapter.Delegate {
 
     val args : ExperiencesFragmentArgs by navArgs()
-
-    var clients:List<Client> = listOf()
     var companies:List<Company> = listOf()
-    var experiences:List<Experience> = listOf()
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -57,18 +53,6 @@ class ExperiencesFragment : Fragment(), ExpandableListAdapter.Delegate {
     private fun getData() {
 
         companies = Gson().fromJson(args.companyList)
-        clients = Gson().fromJson(args.clientList)
-        experiences = Gson().fromJson(args.experienceList)
-
-        for(company in companies) {
-
-            for (client in clients) {
-
-                client.experience = experiences.find{ e -> client.id == e.idClient }
-            }
-
-            company.clients = clients.filter { c -> company.id   == c.idCompany }
-        }
     }
 
     override fun experienceClicked(company: Company, client: Client) {

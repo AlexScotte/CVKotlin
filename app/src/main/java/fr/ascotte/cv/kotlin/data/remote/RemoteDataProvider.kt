@@ -9,15 +9,8 @@ import fr.ascotte.cv.kotlin.data.`object`.*
 
 class RemoteDataProvider(context:Context) {
 
-    private var clients = mutableListOf<Client>()
     private var companies = mutableListOf<Company>()
-    private var experiences = mutableListOf<Experience>()
-    private var competences = mutableListOf<Competence>()
     private var informations: Informations? = null
-
-    init {
-
-    }
 
     fun getDatabaseInformations(resultHandler:(Informations) -> Unit){
 
@@ -39,27 +32,6 @@ class RemoteDataProvider(context:Context) {
         })
     }
 
-    fun getRemoteClients(resultHandler: (List<Client>) -> Unit){
-
-        var ref = FirebaseDatabase.getInstance().getReference("clients")
-        ref.addValueEventListener(object : ValueEventListener{
-
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                for (snapshot in dataSnapshot.children) {
-                    val client = snapshot.getValue(Client::class.java)
-                    clients.add(client!!)
-                }
-
-                resultHandler(clients)
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                throw databaseError.toException()
-            }
-        })
-    }
-
     fun getRemoteCompanies(resultHandler: (List<Company>) -> Unit){
 
         var ref = FirebaseDatabase.getInstance().getReference("companies")
@@ -72,26 +44,6 @@ class RemoteDataProvider(context:Context) {
                     companies.add(company!!)
                 }
                 resultHandler(companies)
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                throw databaseError.toException()
-            }
-        })
-    }
-
-    fun getRemoteExperiences(resultHandler: (List<Experience>) -> Unit){
-
-        var ref = FirebaseDatabase.getInstance().getReference("experiences")
-        ref.addValueEventListener(object : ValueEventListener{
-
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                for (snapshot in dataSnapshot.children) {
-                    val experience = snapshot.getValue(Experience::class.java)
-                    experiences.add(experience!!)
-                }
-                resultHandler(experiences)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {

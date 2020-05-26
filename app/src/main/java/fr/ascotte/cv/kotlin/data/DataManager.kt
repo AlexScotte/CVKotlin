@@ -71,19 +71,9 @@ class DataManager(context: Context) {
 
     private fun createLocalDatabase() {
 
-        dataProvider.getRemoteClients {clients ->
-
-            localDataManager.createClients(clients)
-        }
-
         dataProvider.getRemoteCompanies{ companies ->
 
             localDataManager.createCompanies(companies)
-        }
-
-        dataProvider.getRemoteExperiences {experiences ->
-
-            localDataManager.createExperiences(experiences)
         }
 
         dataProvider.getDatabaseInformations {informations ->

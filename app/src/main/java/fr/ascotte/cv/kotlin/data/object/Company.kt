@@ -1,5 +1,6 @@
 package fr.ascotte.cv.kotlin.data.`object`
 
+import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
@@ -14,18 +15,25 @@ data class Company(
         val department:String = "",
         val town:String = "") : Serializable{
 
-    var clients:List<Client> = listOf()
+    var clients:ArrayList<Client> = ArrayList()
 
-    constructor(realmCompany: RealmCompany): this(
+    constructor(rCompany: RealmCompany): this(
 
-            realmCompany.id,
-            realmCompany.dateStart,
-            realmCompany.dateEnd,
-            realmCompany.name,
-            realmCompany.job,
-            realmCompany.department,
-            realmCompany.town
-    )
+            rCompany.id,
+            rCompany.dateStart,
+            rCompany.dateEnd,
+            rCompany.name,
+            rCompany.job,
+            rCompany.department,
+            rCompany.town
+    ){
+        for (rCLient in rCompany.rClients){
+
+            val client = Client(rCLient)
+            client.idCompany = rCLient.idCompany
+            clients.add(client)
+        }
+    }
 }
 
 @RealmClass
@@ -39,6 +47,8 @@ open class RealmCompany(
         var town:String = "")
     : RealmObject() {
 
+     var rClients: RealmList<RealmClient> = RealmList()
+
     constructor(company: Company) : this(
 
             company.id,
@@ -48,5 +58,13 @@ open class RealmCompany(
             company.job,
             company.department,
             company.town
-    )
+    ){
+
+        for (client in company.clients){
+
+            val rClient = RealmClient(client)
+            rClient.idCompany = company.id
+            rClients.add(rClient)
+        }
+    }
 }

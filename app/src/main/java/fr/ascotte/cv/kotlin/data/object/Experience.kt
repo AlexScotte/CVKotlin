@@ -9,39 +9,53 @@ import java.io.Serializable
 
 data class Experience(
         val id:Int = 0,
-        val idClient: Int = 0,
         val job:String = "",
         val duration:String = "",
         val details:DetailsExperience? = null
         ) : Serializable{
 
     var skills:ArrayList<Competence> = ArrayList()
+    var idClient:Int = 0
 
-    constructor(realmExperience: RealmExperience) : this(
-            realmExperience.id,
-            realmExperience.idClient,
-            realmExperience.job,
-            realmExperience.duration,
-            DetailsExperience(realmExperience.details)
+    constructor(rExperience: RealmExperience) : this(
+        rExperience.id,
+        rExperience.job,
+        rExperience.duration,
+        DetailsExperience(rExperience.rDetails)
     )
+    {
+        for(rSkill in rExperience.rSkills){
+
+            val skill = Competence(rSkill)
+            skill.idExperience = rExperience.id
+            skills.add(skill)
+        }
+    }
 }
 
 @RealmClass
 open class RealmExperience(
-        @PrimaryKey var id:Int = 0,
-        var idClient: Int = 0,
+        var id:Int = 0,
         var job:String = "",
         var duration: String="",
-        var details:RealmDetailsExperience? = null) : RealmObject(){
+        var rDetails:RealmDetailsExperience? = null) : RealmObject(){
 
-    var skills:RealmList<RealmCompetence> = RealmList()
+    var idClient:Int = 0
+    var rSkills:RealmList<RealmCompetence> = RealmList()
 
     constructor(experience: Experience) : this(
 
         experience.id,
-        experience.idClient,
         experience.job,
         experience.duration,
         RealmDetailsExperience(experience.details)
-    )
+    ){
+
+        for(skill in experience.skills){
+
+            val rSkill = RealmCompetence(skill)
+            rSkill.idExperience = experience.id
+            rSkills.add(rSkill)
+        }
+    }
 }

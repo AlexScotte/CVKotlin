@@ -11,9 +11,9 @@ data class DetailsExperience(
     val missions:String = ""
 ) : Serializable {
 
-    constructor(realmDetails: RealmDetailsExperience?) : this(
-        realmDetails?.context ?: "",
-        realmDetails?.missions?: ""
+    constructor(rDetails: RealmDetailsExperience?) : this(
+        rDetails?.context ?: "",
+        rDetails?.missions?: ""
     )
 }
 

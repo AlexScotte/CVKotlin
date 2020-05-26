@@ -12,11 +12,13 @@ data class Competence(
         val important: Int = 0)
     : Serializable {
 
-    constructor(realmCompetence: RealmCompetence):this(
+    var idExperience:Int = 0
 
-            realmCompetence.id,
-            realmCompetence.name,
-            realmCompetence.important
+    constructor(rCompetence: RealmCompetence):this(
+
+            rCompetence.id,
+            rCompetence.name,
+            rCompetence.important
     )
 }
 
@@ -26,6 +28,8 @@ open class RealmCompetence(
         var name:String = "",
         var important: Int = 0)
     : RealmObject() {
+
+    var idExperience:Int = 0
 
     constructor(competence: Competence) : this(
 
