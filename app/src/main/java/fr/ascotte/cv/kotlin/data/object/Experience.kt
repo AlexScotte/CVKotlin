@@ -1,5 +1,6 @@
 package fr.ascotte.cv.kotlin.data.`object`
 
+import android.telecom.Call
 import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
@@ -11,14 +12,17 @@ data class Experience(
         val idClient: Int = 0,
         val job:String = "",
         val duration:String = "",
-        var skills:ArrayList<Competence> = ArrayList()
+        val details:DetailsExperience? = null
         ) : Serializable{
+
+    var skills:ArrayList<Competence> = ArrayList()
 
     constructor(realmExperience: RealmExperience) : this(
             realmExperience.id,
             realmExperience.idClient,
             realmExperience.job,
-            realmExperience.duration
+            realmExperience.duration,
+            DetailsExperience(realmExperience.details)
     )
 }
 
@@ -28,13 +32,16 @@ open class RealmExperience(
         var idClient: Int = 0,
         var job:String = "",
         var duration: String="",
-        var skills:RealmList<RealmCompetence> = RealmList()) : RealmObject(){
+        var details:RealmDetailsExperience? = null) : RealmObject(){
+
+    var skills:RealmList<RealmCompetence> = RealmList()
 
     constructor(experience: Experience) : this(
 
         experience.id,
         experience.idClient,
         experience.job,
-        experience.duration
+        experience.duration,
+        RealmDetailsExperience(experience.details)
     )
 }
