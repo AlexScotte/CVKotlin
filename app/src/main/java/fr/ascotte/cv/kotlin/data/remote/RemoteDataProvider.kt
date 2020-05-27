@@ -51,4 +51,21 @@ class RemoteDataProvider(context:Context) {
             }
         })
     }
+
+    fun getRemoteProfile(resultHandler: (Profile) -> Unit){
+
+        var ref = FirebaseDatabase.getInstance().getReference("profile")
+        ref.addValueEventListener(object : ValueEventListener{
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                val profile = dataSnapshot.getValue(Profile::class.java)
+                resultHandler(profile!!)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                throw databaseError.toException()
+            }
+        })
+    }
 }

@@ -13,12 +13,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.gson.Gson
 import fr.ascotte.cv.kotlin.data.DataManager
-import fr.ascotte.cv.kotlin.data.`object`.Client
-import fr.ascotte.cv.kotlin.data.`object`.RealmClient
+import fr.ascotte.cv.kotlin.ui.profile.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import org.json.JSONObject
 
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener, DataManager.Protocol {
 
     private lateinit var dataManager: DataManager
     private lateinit var navController:NavController
@@ -35,12 +33,18 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottom_Navigation_View.setupWithNavController(navController)
         bottom_Navigation_View.setOnNavigationItemSelectedListener(this)
-        this.dataManager = DataManager(this)
+        this.dataManager = DataManager(this, this)
+        this.dataManager.createDatabase()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
+            R.id.navigation_profile -> {
+
+                val bundle = this.prepareProfileArgs()
+                navController.navigate(R.id.navigation_profile, bundle)
+            }
             R.id.navigation_experiences -> {
 
                 val bundle = this.prepareExperiencesArgs()
@@ -60,6 +64,23 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         var json = Gson().toJson(companies)
         bundle.putString("companyList", json)
+
+        return bundle
+    }
+
+    override fun localProfileCreated() {
+
+        val bundle = this.prepareProfileArgs()
+        navController.navigate(R.id.navigation_profile, bundle)
+    }
+
+    private fun prepareProfileArgs() : Bundle {
+
+        val bundle = Bundle()
+        val profile = dataManager.localDataManager.getProfile()
+
+        var json = Gson().toJson(profile)
+        bundle.putString("profile", json)
 
         return bundle
     }

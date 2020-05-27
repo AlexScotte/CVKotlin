@@ -16,14 +16,29 @@ class LocalDataManager {
 
     fun getLocalDatabaseVersion() : Float?{
 
-        var informations = realm.where(RealmInformations::class.java).findFirst()
-        return informations?.version
+        var rInfo = realm.where(RealmInformations::class.java).findFirst()
+        return rInfo?.version
     }
+
+    fun getProfile() : Profile?{
+
+        var rProfile = realm.where(RealmProfile::class.java).findFirst()
+        return Profile(rProfile!!)
+    }
+
 
     fun getCompanies() : List<Company>{
 
         var companies = realm.where(RealmCompany::class.java).findAll().map { rCompany -> Company(rCompany) }
         return companies
+    }
+
+    fun createProfile(profile: Profile) {
+
+        realm.beginTransaction()
+        var realmObj = RealmProfile(profile)
+        realm.copyToRealm(realmObj)
+        realm.commitTransaction()
     }
 
     fun createCompanies(companies: List<Company>) {

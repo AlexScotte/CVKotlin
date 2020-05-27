@@ -8,8 +8,12 @@
     <fragment
         android:id="@+id/navigation_profile"
         android:name="fr.ascotte.cv.kotlin.ui.profile.ProfileFragment"
-        android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <argument
+            android:name="profile"
+            app:argType="string"
+            android:defaultValue=" "/>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_experiences"

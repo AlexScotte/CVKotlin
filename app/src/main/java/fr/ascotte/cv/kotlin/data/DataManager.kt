@@ -8,12 +8,17 @@ import android.os.Build
 import fr.ascotte.cv.kotlin.data.local.LocalDataManager
 import fr.ascotte.cv.kotlin.data.remote.RemoteDataProvider
 
-class DataManager(context: Context) {
+
+class DataManager(val context: Context, private val protocol:Protocol?)  {
+
+    interface Protocol{
+        fun localProfileCreated(){}
+    }
 
     val localDataManager:LocalDataManager = LocalDataManager()
-    val dataProvider:RemoteDataProvider = RemoteDataProvider(context)
+    private val dataProvider:RemoteDataProvider = RemoteDataProvider(context)
 
-    init {
+    fun createDatabase(){
 
         var isNetworkConnected = isNetworkAvailable(context)
 
@@ -81,5 +86,10 @@ class DataManager(context: Context) {
             localDataManager.createInformations(informations)
         }
 
+        dataProvider.getRemoteProfile {profile ->
+
+            localDataManager.createProfile(profile)
+            protocol?.localProfileCreated()
+        }
     }
 }
