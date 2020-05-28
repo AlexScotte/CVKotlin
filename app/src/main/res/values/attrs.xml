@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleControl">
+        <attr name="circleBackgroundColor" format="color" />
+        <attr name="circleStrokeColor" format="color" />
+        <attr name="circleRadius" format="float" />
+        <attr name="isFilled" format="boolean" />
+        <attr name="circleStrokeWidth" format="float" />
+    </declare-styleable>
+
+</resources>
