@@ -26,6 +26,13 @@ class LocalDataManager {
         return Profile(rProfile!!)
     }
 
+    fun getCompetences() : List<Competence>?{
+
+        val rSkills = realm.where(RealmCompetence::class.java).findAll().toList()
+        val rSkillsImportant = rSkills.filter { it.important == 1 }.distinctBy { x -> x.name }
+        val  skills = rSkillsImportant.map{rSkill -> Competence(rSkill)}
+        return skills
+    }
 
     fun getCompanies() : List<Company>{
 

@@ -78,9 +78,13 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         val bundle = Bundle()
         val profile = dataManager.localDataManager.getProfile()
+        val skills = dataManager.localDataManager.getCompetences()
 
         var json = Gson().toJson(profile)
         bundle.putString("profile", json)
+
+        json = Gson().toJson(skills)
+        bundle.putString("skillList", json)
 
         return bundle
     }

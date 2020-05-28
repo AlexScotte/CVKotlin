@@ -1,7 +1,6 @@
 package fr.ascotte.cv.kotlin.ui.experiences
 
 import android.content.Intent
-import android.content.Intent.ACTION_VIEW
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem

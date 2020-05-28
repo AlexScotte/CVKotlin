@@ -13,6 +13,10 @@
             android:name="profile"
             app:argType="string"
             android:defaultValue=" "/>
+        <argument
+            android:name="skillList"
+            app:argType="string"
+            android:defaultValue=" " />
     </fragment>
 
     <fragment
