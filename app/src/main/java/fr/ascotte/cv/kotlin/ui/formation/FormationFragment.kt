@@ -25,7 +25,8 @@ class FormationFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(FormationViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        activity?.title = getString(R.string.title_view_formation)
     }
 
 }

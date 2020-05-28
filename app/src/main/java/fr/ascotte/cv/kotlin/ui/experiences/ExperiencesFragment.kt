@@ -33,10 +33,10 @@ class ExperiencesFragment : Fragment(), ExpandableListAdapter.Delegate {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        activity?.title = getString(R.string.title_view_experiences)
         this.getData()
 
         val hasMap = HashMap<Company, List<Client>>()
-
         for (company in companies){
 
             hasMap.put(company, company.clients)

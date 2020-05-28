@@ -14,4 +14,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_view_experiences">Mes expériences professionnelles</string>
+    <string name="title_view_formation">Mon parcours</string>
+    <string name="title_view_contact">Pour me contacter</string>
 </resources>

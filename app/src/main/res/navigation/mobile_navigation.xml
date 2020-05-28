@@ -22,7 +22,6 @@
     <fragment
         android:id="@+id/navigation_experiences"
         android:name="fr.ascotte.cv.kotlin.ui.experiences.ExperiencesFragment"
-        android:label="@string/title_experiences"
         tools:layout="@layout/fragment_experiences" >
         <argument
             android:name="companyList"
@@ -33,12 +32,9 @@
     <fragment
         android:id="@+id/navigation_formation"
         android:name="fr.ascotte.cv.kotlin.ui.formation.FormationFragment"
-        android:label="@string/title_formation"
         tools:layout="@layout/fragment_formation" />
-
     <fragment
         android:id="@+id/navigation_contact"
         android:name="fr.ascotte.cv.kotlin.ui.contact.ContactFragment"
-        android:label="@string/title_notifications"
         tools:layout="@layout/fragment_contact" />
 </navigation>
