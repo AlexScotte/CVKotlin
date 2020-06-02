@@ -46,6 +46,12 @@ class LocalDataManager {
         return formations
     }
 
+    fun getContact() : Contact?{
+
+        var rContact = realm.where(RealmContact::class.java).findFirst()
+        return Contact(rContact!!)
+    }
+
     fun createProfile(profile: Profile) {
 
         realm.beginTransaction()
@@ -80,6 +86,14 @@ class LocalDataManager {
 
         realm.beginTransaction()
         var realmObj = RealmInformations(informations)
+        realm.copyToRealm(realmObj)
+        realm.commitTransaction()
+    }
+
+    fun createContact(contact: Contact) {
+
+        realm.beginTransaction()
+        var realmObj = RealmContact(contact)
         realm.copyToRealm(realmObj)
         realm.commitTransaction()
     }

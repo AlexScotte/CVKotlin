@@ -55,6 +55,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 val bundle = this.prepareFormationsArgs()
                 navController.navigate(R.id.navigation_formation, bundle)
             }
+            R.id.navigation_contact -> {
+
+                val bundle = this.prepareContactArgs()
+                navController.navigate(R.id.navigation_contact, bundle)
+            }
             else -> {
                 NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item)
             }
@@ -100,6 +105,17 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         var json = Gson().toJson(formations)
         bundle.putString("formationList", json)
+
+        return bundle
+    }
+
+    private fun prepareContactArgs() : Bundle {
+
+        val bundle = Bundle()
+        val contact = dataManager.localDataManager.getContact()
+
+        var json = Gson().toJson(contact)
+        bundle.putString("contact", json)
 
         return bundle
     }

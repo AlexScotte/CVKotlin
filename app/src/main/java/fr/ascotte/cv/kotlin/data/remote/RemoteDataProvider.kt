@@ -89,4 +89,21 @@ class RemoteDataProvider(context:Context) {
             }
         })
     }
+
+    fun getRemoteContact(resultHandler: (Contact) -> Unit){
+
+        var ref = FirebaseDatabase.getInstance().getReference("contact")
+        ref.addValueEventListener(object : ValueEventListener{
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                val contact = dataSnapshot.getValue(Contact::class.java)
+                resultHandler(contact!!)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                throw databaseError.toException()
+            }
+        })
+    }
 }

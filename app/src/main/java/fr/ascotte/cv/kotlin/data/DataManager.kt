@@ -96,5 +96,10 @@ class DataManager(val context: Context, private val protocol:Protocol?)  {
 
             localDataManager.createFormations(formations)
         }
+
+        dataProvider.getRemoteContact {contact ->
+
+            localDataManager.createContact(contact)
+        }
     }
 }

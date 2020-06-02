@@ -38,8 +38,14 @@
             app:argType="string"
             android:defaultValue='""' />
     </fragment>
+
     <fragment
         android:id="@+id/navigation_contact"
         android:name="fr.ascotte.cv.kotlin.ui.contact.ContactFragment"
-        tools:layout="@layout/fragment_contact" />
+        tools:layout="@layout/fragment_contact" >
+        <argument
+            android:name="contact"
+            app:argType="string"
+            android:defaultValue='""'/>
+    </fragment>
 </navigation>
