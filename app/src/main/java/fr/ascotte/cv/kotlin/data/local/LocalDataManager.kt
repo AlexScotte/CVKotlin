@@ -40,6 +40,12 @@ class LocalDataManager {
         return companies
     }
 
+    fun getFormations() : List<Formation>{
+
+        var formations = realm.where(RealmFormation::class.java).findAll().map { rFormation -> Formation(rFormation) }
+        return formations
+    }
+
     fun createProfile(profile: Profile) {
 
         realm.beginTransaction()
@@ -55,6 +61,17 @@ class LocalDataManager {
 
             val rCompany = RealmCompany(company)
             realm.copyToRealm(rCompany)
+        }
+        realm.commitTransaction()
+    }
+
+    fun createFormations(formations: List<Formation>) {
+
+        realm.beginTransaction()
+        for(formation in formations){
+
+            val rFormation = RealmFormation(formation)
+            realm.copyToRealm(rFormation)
         }
         realm.commitTransaction()
     }

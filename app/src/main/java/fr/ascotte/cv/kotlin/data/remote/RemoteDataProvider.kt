@@ -10,6 +10,7 @@ import fr.ascotte.cv.kotlin.data.`object`.*
 class RemoteDataProvider(context:Context) {
 
     private var companies = mutableListOf<Company>()
+    private var formations = mutableListOf<Formation>()
     private var informations: Informations? = null
 
     fun getDatabaseInformations(resultHandler:(Informations) -> Unit){
@@ -24,6 +25,23 @@ class RemoteDataProvider(context:Context) {
                     version ?: 0F
                 )
                 resultHandler(informations!!)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                throw databaseError.toException()
+            }
+        })
+    }
+
+    fun getRemoteProfile(resultHandler: (Profile) -> Unit){
+
+        var ref = FirebaseDatabase.getInstance().getReference("profile")
+        ref.addValueEventListener(object : ValueEventListener{
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                val profile = dataSnapshot.getValue(Profile::class.java)
+                resultHandler(profile!!)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -52,15 +70,18 @@ class RemoteDataProvider(context:Context) {
         })
     }
 
-    fun getRemoteProfile(resultHandler: (Profile) -> Unit){
+    fun getRemoteFormations(resultHandler: (List<Formation>) -> Unit){
 
-        var ref = FirebaseDatabase.getInstance().getReference("profile")
+        var ref = FirebaseDatabase.getInstance().getReference("formations")
         ref.addValueEventListener(object : ValueEventListener{
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                val profile = dataSnapshot.getValue(Profile::class.java)
-                resultHandler(profile!!)
+                for (snapshot in dataSnapshot.children) {
+                    val formation = snapshot.getValue(Formation::class.java)
+                    formations.add(formation!!)
+                }
+                resultHandler(formations)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {

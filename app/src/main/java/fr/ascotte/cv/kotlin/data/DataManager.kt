@@ -91,5 +91,10 @@ class DataManager(val context: Context, private val protocol:Protocol?)  {
             localDataManager.createProfile(profile)
             protocol?.localProfileCreated()
         }
+
+        dataProvider.getRemoteFormations {formations ->
+
+            localDataManager.createFormations(formations)
+        }
     }
 }

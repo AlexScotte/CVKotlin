@@ -42,7 +42,7 @@ class ExperienceDetailsActivity : AppCompatActivity() {
         Glide.with(this).load(client.imageUrl).override(300, 300).into(ui_img_client)
         ui_img_client.setOnClickListener{
 
-            if(!client.site.isNullOrEmpty()){
+            if(client.site.isNotEmpty()){
 
                 val openUrl = Intent(android.content.Intent.ACTION_VIEW)
                 openUrl.data = Uri.parse(client.site)

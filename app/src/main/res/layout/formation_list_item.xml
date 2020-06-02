@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/ui_lbl_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="2014"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ui_crcl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ui_crcl" />
+
+    <View
+        android:id="@+id/ui_line_top"
+        android:layout_width="3dp"
+        android:layout_height="0dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toTopOf="@+id/ui_crcl"
+        app:layout_constraintEnd_toEndOf="@+id/ui_crcl"
+        app:layout_constraintStart_toStartOf="@+id/ui_crcl"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <fr.ascotte.cv.kotlin.ui.CircleControl
+        android:id="@+id/ui_crcl"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        app:circleBackgroundColor="@android:color/darker_gray"
+        app:circleStrokeColor="@android:color/darker_gray"
+        app:circleStrokeWidth="10"
+        app:isFilled="false"
+        app:layout_constraintBottom_toBottomOf="@+id/ui_lbl_name"
+        app:layout_constraintStart_toEndOf="@+id/ui_lbl_date"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <View
+        android:id="@+id/ui_line_bottom"
+        android:layout_width="3dp"
+        android:layout_height="0dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/ui_crcl"
+        app:layout_constraintStart_toStartOf="@+id/ui_crcl"
+        app:layout_constraintTop_toBottomOf="@+id/ui_crcl"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/ui_lbl_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Université de lille 1 (59) de okfeofpsfpeo;f sfposfpsokfp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ui_crcl"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ui_lbl_establishment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textStyle="italic"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ui_lbl_name"
+        app:layout_constraintTop_toBottomOf="@+id/ui_lbl_name" />
+
+    <TextView
+        android:id="@+id/ui_lbl_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ui_lbl_establishment"
+        app:layout_constraintTop_toBottomOf="@+id/ui_lbl_establishment" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ui_lbl_description" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

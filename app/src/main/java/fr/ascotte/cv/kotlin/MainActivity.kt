@@ -50,24 +50,17 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 val bundle = this.prepareExperiencesArgs()
                 navController.navigate(R.id.navigation_experiences, bundle)
             }
+            R.id.navigation_formation -> {
+
+                val bundle = this.prepareFormationsArgs()
+                navController.navigate(R.id.navigation_formation, bundle)
+            }
             else -> {
                 NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item)
             }
         }
         return true
     }
-
-    private fun prepareExperiencesArgs() : Bundle {
-
-        val bundle = Bundle()
-        val companies = dataManager.localDataManager.getCompanies().sortedByDescending { it.id }
-
-        var json = Gson().toJson(companies)
-        bundle.putString("companyList", json)
-
-        return bundle
-    }
-
     override fun localProfileCreated() {
 
         val bundle = this.prepareProfileArgs()
@@ -85,6 +78,28 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         json = Gson().toJson(skills)
         bundle.putString("skillList", json)
+
+        return bundle
+    }
+
+    private fun prepareExperiencesArgs() : Bundle {
+
+        val bundle = Bundle()
+        val companies = dataManager.localDataManager.getCompanies().sortedByDescending { it.id }
+
+        var json = Gson().toJson(companies)
+        bundle.putString("companyList", json)
+
+        return bundle
+    }
+
+    private fun prepareFormationsArgs() : Bundle {
+
+        val bundle = Bundle()
+        val formations = dataManager.localDataManager.getFormations().sortedByDescending { it.id }
+
+        var json = Gson().toJson(formations)
+        bundle.putString("formationList", json)
 
         return bundle
     }

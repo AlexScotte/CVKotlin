@@ -32,7 +32,12 @@
     <fragment
         android:id="@+id/navigation_formation"
         android:name="fr.ascotte.cv.kotlin.ui.formation.FormationFragment"
-        tools:layout="@layout/fragment_formation" />
+        tools:layout="@layout/fragment_formation" >
+        <argument
+            android:name="formationList"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
     <fragment
         android:id="@+id/navigation_contact"
         android:name="fr.ascotte.cv.kotlin.ui.contact.ContactFragment"
