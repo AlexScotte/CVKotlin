@@ -1,12 +1,10 @@
-package fr.ascotte.cv.kotlin.ui
+package fr.ascotte.cv.kotlin.ui.experiences
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.TouchDelegate
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
-import android.widget.ExpandableListView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import fr.ascotte.cv.kotlin.R

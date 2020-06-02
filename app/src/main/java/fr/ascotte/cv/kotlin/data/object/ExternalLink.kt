@@ -23,9 +23,9 @@ data class ExternalLink(
 @RealmClass
 open class RealmExternalLink(
     var id:Int = 0,
-    val imageUrl:String = "",
-    val name:String = "",
-    val url:String = "")
+    var imageUrl:String = "",
+    var name:String = "",
+    var url:String = "")
     : RealmObject(){
 
     constructor(externalLink: ExternalLink) : this(

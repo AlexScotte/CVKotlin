@@ -5,17 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ExpandableListView.OnChildClickListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.google.gson.Gson
 import fr.ascotte.cv.kotlin.R
 import fr.ascotte.cv.kotlin.data.`object`.Client
 import fr.ascotte.cv.kotlin.data.`object`.Company
-import fr.ascotte.cv.kotlin.data.`object`.Competence
-import fr.ascotte.cv.kotlin.data.`object`.Experience
 import fr.ascotte.cv.kotlin.extensions.fromJson
-import fr.ascotte.cv.kotlin.ui.ExpandableListAdapter
 import kotlinx.android.synthetic.main.fragment_experiences.*
 
 
@@ -42,7 +38,12 @@ class ExperiencesFragment : Fragment(), ExpandableListAdapter.Delegate {
             hasMap.put(company, company.clients)
         }
 
-        val adapter = ExpandableListAdapter(this, view.context, companies, hasMap)
+        val adapter = ExpandableListAdapter(
+            this,
+            view.context,
+            companies,
+            hasMap
+        )
         ui_expandable_list.setAdapter(adapter)
 
         // Expand group at the beginning
