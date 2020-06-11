@@ -51,14 +51,30 @@ class LinkListAdapter(val context:Context, val delegate:Delegate, private val li
 
         fun fillItem(item : ExternalLink){
 
+            var url = item.url.toLowerCase()
+            url = url.replace("https://", "")
+            url = url.replace("http://", "")
+            url = url.replace("www.", "")
+
+            rootView.ui_link_name.text = url
+
             if(item.imageUrl.isNotEmpty() && item.imageUrl.isNotBlank())
-                Glide.with(context).load(item.imageUrl).override(300, 300).into(rootView.ui_img_link)
+                Glide.with(context).load(item.imageUrl).override(80, 80).into(rootView.ui_img_link)
         }
 
         override fun onClick(v: View?) {
 
             if(v != null)
                 onItemClickedAtIndex(adapterPosition)
+        }
+
+        private fun removeChar(original:String, str:String) : String{
+
+            var newString = original
+            if(original.contains(str)){
+                newString = original.replace(str, "")
+            }
+            return newString
         }
     }
 }

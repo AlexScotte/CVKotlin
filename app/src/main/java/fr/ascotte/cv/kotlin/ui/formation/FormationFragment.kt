@@ -26,8 +26,8 @@ class FormationFragment : Fragment(), FormationListAdapter.Delegate {
         return inflater.inflate(R.layout.fragment_formation, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         activity?.title = getString(R.string.title_view_formation)
 
