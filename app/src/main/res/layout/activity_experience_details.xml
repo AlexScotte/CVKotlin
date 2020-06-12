@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.experiences.ExperienceDetailsActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/ui_lbl_job"
         android:layout_width="wrap_content"
@@ -101,11 +112,10 @@
         android:id="@+id/ui_img_client"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:srcCompat="@android:drawable/ic_menu_report_image" />
 
     <TextView
@@ -117,4 +127,7 @@
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ui_lbl_job" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

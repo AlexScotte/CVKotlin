@@ -19,6 +19,7 @@ class ExperienceDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_experience_details)
 
+        setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val company = intent.getSerializableExtra("company") as Company
