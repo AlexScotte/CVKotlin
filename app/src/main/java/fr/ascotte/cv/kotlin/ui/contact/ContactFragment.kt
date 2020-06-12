@@ -8,8 +8,10 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
@@ -36,6 +38,7 @@ class ContactFragment : Fragment(), LinkListAdapter.Delegate  {
         super.onViewCreated(view, savedInstanceState)
 
         activity?.title = getString(R.string.title_view_contact)
+        this.manageToolbar()
         getData()
         ui_extlink_list.layoutManager = LinearLayoutManager(this.context)
         ui_extlink_list.adapter = LinkListAdapter(this.context!!, this, contact.externalLinks)
@@ -78,6 +81,13 @@ class ContactFragment : Fragment(), LinkListAdapter.Delegate  {
         ui_btn_download.setOnClickListener{
             onDownloadButtonClicked()
         }
+    }
+
+    private fun manageToolbar(){
+
+        val toolbar = activity?.findViewById(R.id.toolbar) as Toolbar
+        val searchItem = toolbar.menu.findItem(R.id.action_search)
+        searchItem?.isVisible = false
     }
 
     private fun getData() {

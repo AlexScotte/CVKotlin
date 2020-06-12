@@ -1,7 +1,9 @@
 package fr.ascotte.cv.kotlin
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
+import android.widget.SearchView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
@@ -24,6 +26,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(findViewById(R.id.toolbar))
 
         navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
@@ -35,6 +38,15 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         bottom_Navigation_View.setOnNavigationItemSelectedListener(this)
         this.dataManager = DataManager(this, this)
         this.dataManager.createDatabase()
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+
+        menuInflater.inflate(R.menu.toolbar_search, menu)
+        val searchItem = menu?.findItem(R.id.action_search)
+        val searchView = searchItem?.actionView as androidx.appcompat.widget.SearchView
+
+        return true
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

@@ -14,10 +14,19 @@ import kotlinx.android.synthetic.main.list_header.view.*
 import kotlinx.android.synthetic.main.list_item.view.*
 
 
-class ExpandableListAdapter (val delegate: Delegate, val context:Context, val listOfHeaderData: List<Company>, val listOfChildData: HashMap<Company, List<Client>>) : BaseExpandableListAdapter() {
+class ExpandableListAdapter (val delegate: Delegate, val context:Context, var listOfHeaderData: MutableList<Company>, var listOfChildData: HashMap<Company, List<Client>>) : BaseExpandableListAdapter() {
 
     interface Delegate{
         fun experienceClicked(company: Company, client: Client)
+    }
+
+    fun updateData(companies: MutableList<Company>, hasMap: java.util.HashMap<Company, List<Client>>) {
+
+        listOfHeaderData.clear()
+        listOfChildData.clear()
+        listOfHeaderData.addAll(companies)
+        listOfChildData = hasMap
+        notifyDataSetChanged()
     }
 
     override fun getGroup(groupPosition: Int): Any {

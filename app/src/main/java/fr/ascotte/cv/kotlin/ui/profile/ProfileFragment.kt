@@ -2,8 +2,10 @@ package fr.ascotte.cv.kotlin.ui.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -37,6 +39,7 @@ class ProfileFragment : Fragment(), DataManager.Protocol {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        this.manageToolbar()
         this.getData()
         if(profile != null){
 
@@ -71,6 +74,13 @@ class ProfileFragment : Fragment(), DataManager.Protocol {
                 ui_chpGrp_skills.addView(chip)
             }
         }
+    }
+
+    private fun manageToolbar(){
+
+        val toolbar = activity?.findViewById(R.id.toolbar) as Toolbar
+        val searchItem = toolbar.menu.findItem(R.id.action_search)
+        searchItem?.isVisible = false
     }
 
     private fun getData() {
