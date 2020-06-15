@@ -39,6 +39,7 @@
         android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
         android:text="subtitle"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ui_child_title" />

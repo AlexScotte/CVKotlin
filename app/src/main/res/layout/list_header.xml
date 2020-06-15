@@ -17,6 +17,7 @@
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:text="title"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/ui_subtitle_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -120,10 +120,12 @@ class ExpandableListAdapter (val delegate: Delegate, val context:Context, var li
             ui_child_title.text = title
 
             var duration:String = ""
-            if(!client.experience?.duration.isNullOrEmpty())
+            if(client.experience?.duration.isNullOrEmpty())
+                ui_child_subtitle.visibility = View.GONE
+            else
                 duration = "(${client.experience?.duration})"
 
-            val subtitle =  "${client.experience?.job} $duration"
+            val subtitle =  duration
             ui_child_subtitle.text = subtitle
 
             if(client.experience != null){
