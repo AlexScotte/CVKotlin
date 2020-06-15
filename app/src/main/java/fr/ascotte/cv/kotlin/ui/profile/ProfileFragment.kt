@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_experience_details.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.ui_chpGrp_skills
 import kotlinx.android.synthetic.main.fragment_profile.ui_lbl_job
+import java.util.*
 
 
 class ProfileFragment : Fragment(), DataManager.Protocol {
@@ -39,12 +40,11 @@ class ProfileFragment : Fragment(), DataManager.Protocol {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        this.manageToolbar()
         this.getData()
         if(profile != null){
 
             activity?.title = "${profile?.firstName} ${profile?.lastName}"
-            ui_lbl_job.text = profile?.job?.toUpperCase()
+            ui_lbl_job.text = profile?.job?.toUpperCase(Locale.ROOT)
             ui_lbl_location.text = profile?.location
 
             val descr = profile?.description?.replace("\\n", "\n")
@@ -74,13 +74,6 @@ class ProfileFragment : Fragment(), DataManager.Protocol {
                 ui_chpGrp_skills.addView(chip)
             }
         }
-    }
-
-    private fun manageToolbar(){
-
-        val toolbar = activity?.findViewById(R.id.toolbar) as Toolbar
-        val searchItem = toolbar.menu.findItem(R.id.action_search)
-        searchItem?.isVisible = false
     }
 
     private fun getData() {

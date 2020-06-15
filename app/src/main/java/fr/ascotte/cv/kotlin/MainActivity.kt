@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.widget.SearchView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -38,15 +39,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         bottom_Navigation_View.setOnNavigationItemSelectedListener(this)
         this.dataManager = DataManager(this, this)
         this.dataManager.createDatabase()
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-
-        menuInflater.inflate(R.menu.toolbar_search, menu)
-        val searchItem = menu?.findItem(R.id.action_search)
-        val searchView = searchItem?.actionView as androidx.appcompat.widget.SearchView
-
-        return true
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

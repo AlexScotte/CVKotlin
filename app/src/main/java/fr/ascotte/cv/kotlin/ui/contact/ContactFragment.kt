@@ -38,10 +38,9 @@ class ContactFragment : Fragment(), LinkListAdapter.Delegate  {
         super.onViewCreated(view, savedInstanceState)
 
         activity?.title = getString(R.string.title_view_contact)
-        this.manageToolbar()
         getData()
         ui_extlink_list.layoutManager = LinearLayoutManager(this.context)
-        ui_extlink_list.adapter = LinkListAdapter(this.context!!, this, contact.externalLinks)
+        ui_extlink_list.adapter = LinkListAdapter(this.requireContext(), this, contact.externalLinks)
 
         if(contact.cvUrl.isEmpty() || contact.cvUrl.isBlank())
             ui_btn_download.isEnabled = false
@@ -81,13 +80,6 @@ class ContactFragment : Fragment(), LinkListAdapter.Delegate  {
         ui_btn_download.setOnClickListener{
             onDownloadButtonClicked()
         }
-    }
-
-    private fun manageToolbar(){
-
-        val toolbar = activity?.findViewById(R.id.toolbar) as Toolbar
-        val searchItem = toolbar.menu.findItem(R.id.action_search)
-        searchItem?.isVisible = false
     }
 
     private fun getData() {

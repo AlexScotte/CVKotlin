@@ -24,6 +24,7 @@ class ExperiencesFragment : Fragment(), ExpandableListAdapter.Delegate {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_experiences, container, false)
     }
 
@@ -31,7 +32,6 @@ class ExperiencesFragment : Fragment(), ExpandableListAdapter.Delegate {
         super.onViewCreated(view, savedInstanceState)
 
         activity?.title = getString(R.string.title_view_experiences)
-        this.manageToolbar()
         this.getData()
 
         var comp = mutableListOf<Company>()
@@ -50,12 +50,15 @@ class ExperiencesFragment : Fragment(), ExpandableListAdapter.Delegate {
             ui_expandable_list.expandGroup(i)
     }
 
-    private fun manageToolbar(){
 
-        val toolbar = activity?.findViewById(R.id.toolbar) as Toolbar
-        val searchItem = toolbar.menu.findItem(R.id.action_search)
-        searchItem?.isVisible = true
+
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, menuInflater)
+
+        menuInflater.inflate(R.menu.toolbar_search, menu)
+        val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem?.actionView as androidx.appcompat.widget.SearchView
+        searchItem.isVisible = true
 
         searchItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener{
 
@@ -98,7 +101,7 @@ class ExperiencesFragment : Fragment(), ExpandableListAdapter.Delegate {
 
             for (company in companies){
 
-                var tmpClients = mutableListOf<Client>()
+                val tmpClients = mutableListOf<Client>()
                 for(client in company.clients){
 
                     val matching = client.experience?.skills?.any{ s -> s.name.contains(skillName, ignoreCase = true) }
