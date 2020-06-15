@@ -1,5 +1,6 @@
 package fr.ascotte.cv.kotlin
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -16,6 +17,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.gson.Gson
 import fr.ascotte.cv.kotlin.data.DataManager
+import fr.ascotte.cv.kotlin.data.PreferencesManager
 import fr.ascotte.cv.kotlin.ui.profile.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -24,7 +26,15 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private lateinit var dataManager: DataManager
     private lateinit var navController:NavController
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        // /!\ Be careful to do it before super.onCreate and setContentView
+        val preferencesManager = PreferencesManager(this)
+        if(!preferencesManager.isDarkThemeOn()){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))

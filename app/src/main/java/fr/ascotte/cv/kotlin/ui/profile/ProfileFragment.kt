@@ -1,18 +1,21 @@
 package fr.ascotte.cv.kotlin.ui.profile
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.NavigationUI
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import com.google.gson.Gson
 import fr.ascotte.cv.kotlin.R
+import fr.ascotte.cv.kotlin.R.*
 import fr.ascotte.cv.kotlin.data.DataManager
+import fr.ascotte.cv.kotlin.data.PreferencesManager
 import fr.ascotte.cv.kotlin.data.`object`.Company
 import fr.ascotte.cv.kotlin.data.`object`.Competence
 import fr.ascotte.cv.kotlin.data.`object`.Profile
@@ -29,16 +32,20 @@ class ProfileFragment : Fragment(), DataManager.Protocol {
     val args: ProfileFragmentArgs by navArgs()
     var profile: Profile? = null
     var skills:List<Competence> = listOf()
+    private lateinit var preferencesManager: PreferencesManager
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        setHasOptionsMenu(true)
+        return inflater.inflate(layout.fragment_profile, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        preferencesManager = PreferencesManager(requireActivity())
 
         this.getData()
         if(profile != null){
@@ -74,6 +81,36 @@ class ProfileFragment : Fragment(), DataManager.Protocol {
                 ui_chpGrp_skills.addView(chip)
             }
         }
+    }
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, menuInflater)
+
+        menuInflater.inflate(R.menu.toolbar_settings, menu)
+        val settingsItem = menu.findItem(R.id.settings_mode)
+
+        settingsItem.isChecked = preferencesManager.isDarkThemeOn()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.settings_mode -> {
+
+                if(item.isChecked){
+
+                    item.isChecked = false
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+                }
+                 else{
+
+                    item.isChecked = true
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
+
+                preferencesManager.setDarkTheme(item.isChecked)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun getData() {
