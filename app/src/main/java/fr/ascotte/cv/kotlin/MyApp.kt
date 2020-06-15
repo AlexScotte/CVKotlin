@@ -10,7 +10,7 @@ class MyApp : Application() {
         super.onCreate()
         Realm.init(this)
         // Use config below to delete DB in debug
-        val config = RealmConfiguration.Builder().inMemory().deleteRealmIfMigrationNeeded().build()
+        val config = RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build()
         Realm.setDefaultConfiguration(config)
     }
 }

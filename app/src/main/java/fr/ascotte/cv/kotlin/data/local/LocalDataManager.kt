@@ -23,7 +23,8 @@ class LocalDataManager {
     fun getProfile() : Profile?{
 
         var rProfile = realm.where(RealmProfile::class.java).findFirst()
-        return Profile(rProfile!!)
+        var profile = if(rProfile == null) Profile() else Profile(rProfile)
+        return profile
     }
 
     fun getCompetences() : List<Competence>?{
@@ -49,7 +50,8 @@ class LocalDataManager {
     fun getContact() : Contact?{
 
         var rContact = realm.where(RealmContact::class.java).findFirst()
-        return Contact(rContact!!)
+        var contact = if(rContact == null) Contact() else Contact(rContact)
+        return contact
     }
 
     fun createProfile(profile: Profile) {

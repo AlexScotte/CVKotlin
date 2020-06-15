@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">CVKotlin</string>
+    <string name="global_accept">Accepter</string>
+    <string name="global_shutdown">Fermer l\'application</string>
+    <string name="global_continue">Continuer quand même</string>
+    <string name="warning_no_connection_title">Aucune connexion</string>
+    <string name="warning_no_data_connection_desc">Attention, vous n\'êtes pas connecté à internet et aucune données n\'a été enregistrées.\n\nVeuillez vous connecter à internet et redémarrer l\'application</string>
+    <string name="warning_no_connection_new_version_desc">Attention, vous n\'êtes pas connecté à internet.\n\nLes données affichées ne sont peut-être pas à jour</string>
     <string name="title_profile">Profil</string>
     <string name="title_notifications">Contact</string>
     <string name="title_experiences">Experiences</string>
