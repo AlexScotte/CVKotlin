@@ -13,9 +13,9 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="32dp"
-        android:src="@android:drawable/stat_sys_phone_call"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/round_phone_24" />
 
     <TextView
         android:id="@+id/ui_lbl_phone"
@@ -35,9 +35,9 @@
         android:layout_height="30dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
-        android:src="@android:drawable/ic_dialog_email"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ui_img_phone" />
+        app:layout_constraintTop_toBottomOf="@+id/ui_img_phone"
+        app:srcCompat="@drawable/round_email_24" />
 
     <TextView
         android:id="@+id/ui_lbl_email"
