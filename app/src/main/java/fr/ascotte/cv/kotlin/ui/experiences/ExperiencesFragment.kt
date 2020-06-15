@@ -13,6 +13,8 @@ import fr.ascotte.cv.kotlin.data.`object`.Client
 import fr.ascotte.cv.kotlin.data.`object`.Company
 import fr.ascotte.cv.kotlin.extensions.fromJson
 import kotlinx.android.synthetic.main.fragment_experiences.*
+import java.util.*
+import kotlin.collections.HashMap
 
 
 class ExperiencesFragment : Fragment(), ExpandableListAdapter.Delegate {
@@ -102,7 +104,7 @@ class ExperiencesFragment : Fragment(), ExpandableListAdapter.Delegate {
             for (company in companies){
 
                 val tmpClients = mutableListOf<Client>()
-                for(client in company.clients){
+                for(client in company.clients.filter { c -> c.name.toLowerCase(Locale.ROOT) != "perso" }){
 
                     val matching = client.experience?.skills?.any{ s -> s.name.contains(skillName, ignoreCase = true) }
                     if(matching != null && matching){
@@ -131,7 +133,7 @@ class ExperiencesFragment : Fragment(), ExpandableListAdapter.Delegate {
         val hasMap = HashMap<Company, List<Client>>()
         for (company in companies){
 
-            hasMap[company] = company.clients
+            hasMap[company] = company.clients.filter { c -> c.name.toLowerCase(Locale.ROOT) != "perso" }
         }
 
         return hasMap
