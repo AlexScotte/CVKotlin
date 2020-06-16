@@ -1,17 +1,32 @@
 package fr.ascotte.cv.kotlin.data.local
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import fr.ascotte.cv.kotlin.data.`object`.*
 import io.realm.Realm
-import io.realm.RealmList
-import io.realm.RealmResults
 
 class LocalDataManager {
 
-    private val realm: Realm = Realm.getDefaultInstance()
+    private var realm: Realm = Realm.getDefaultInstance()
 
     init {
 
         getLocalDatabaseVersion()
+    }
+
+    fun clearLocalDatabase(){
+
+        try {
+
+            realm.close()
+            Realm.deleteRealm(realm.configuration)
+        } catch (e: Exception) {
+
+            Log.e(TAG, "removeAllData:" + e.message)
+        } finally {
+
+            realm = Realm.getDefaultInstance()
+        }
     }
 
     fun getLocalDatabaseVersion() : Float?{

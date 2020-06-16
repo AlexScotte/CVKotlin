@@ -57,6 +57,8 @@ class DataManager(val context: Context, private val protocol:Protocol?)  {
                     if(remoteDatabaseInformations != null){
 
                         if(remoteDatabaseInformations.version > localDatabaseVersion){
+
+                            localDataManager.clearLocalDatabase()
                             this.createLocalDatabase()
                         }
                     }
