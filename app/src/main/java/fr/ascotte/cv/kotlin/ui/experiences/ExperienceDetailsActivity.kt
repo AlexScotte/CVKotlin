@@ -34,8 +34,17 @@ class ExperienceDetailsActivity : AppCompatActivity() {
 
         ui_lbl_job.text = client.experience?.job?.toUpperCase()
 
-        val contxt = client.experience?.details?.context?.replace("\\n", "\n")
-        ui_lbl_context_descr.text = contxt
+        if(client.experience?.details?.context.isNullOrEmpty()){
+
+            ui_lbl_context.visibility = View.GONE
+            ui_lbl_context_descr.visibility = View.GONE
+        }
+        else{
+
+            val contxt = client.experience?.details?.context?.replace("\\n", "\n")
+            ui_lbl_context_descr.text = contxt
+        }
+
 
         val missions = client.experience?.details?.missions?.replace("\\n", "\n")
         ui_lbl_missions_descr.text = missions
