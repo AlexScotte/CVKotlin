@@ -61,6 +61,9 @@ class DataManager(val context: Context, private val protocol:Protocol?)  {
                             localDataManager.clearLocalDatabase()
                             this.createLocalDatabase()
                         }
+                        else{
+                            protocol?.localProfileCreated()
+                        }
                     }
                 }
             }
