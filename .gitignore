@@ -12,3 +12,9 @@
 /captures
 .externalNativeBuild
 .cxx
+/Screenshots/
+/app/release/
+/app/.idea/
+/.idea/
+/cvkotlinkeystore.jks
+/private_key.pepk
