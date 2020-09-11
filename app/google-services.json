@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "367247923034",
+    "firebase_url": "https://cv-ascotte.firebaseio.com",
+    "project_id": "cv-ascotte",
+    "storage_bucket": "cv-ascotte.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367247923034:android:b9ebb8c4205f7ca5a10563",
+        "android_client_info": {
+          "package_name": "fr.ascotte.cv.kotlin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "367247923034-movtqtdttgngg78dqdjl8gr8l4cpvqbg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.ascotte.cv.kotlin",
+            "certificate_hash": "e55354273bae5c9081d0ffc66a939b3690065bea"
+          }
+        },
+        {
+          "client_id": "367247923034-udch07751k1hmkjtf0l6m236hap4rldc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAE4mRT4wGcIhAHCb162IYqIl_CEOYQFmY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "367247923034-udch07751k1hmkjtf0l6m236hap4rldc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
