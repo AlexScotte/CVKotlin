@@ -9,6 +9,9 @@ trigger:
 pool:
   vmImage: 'macos-latest'
 
+variables:
+  - group: android-build-variables
+
 steps:
 - task: Gradle@2
   inputs:
