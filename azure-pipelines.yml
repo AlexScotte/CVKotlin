@@ -30,21 +30,20 @@ steps:
     apkFiles: '**/*.apk'
     apksign: true
     apksignerKeystoreFile: 'production.keystore'
-      apksignerKeystorePassword: $(keystore.password)
-      apksignerKeystoreAlias: $(key.alias)
-      apksignerKeyPassword: $(key.password)
-      apksignerArguments: --out $(outputDirectory)/ascottecvkotlin.apk
+    apksignerKeystorePassword: $(keystore.password)
+    apksignerKeystoreAlias: $(key.alias)
+    apksignerKeyPassword: $(key.password)
+    apksignerArguments: --out $(outputDirectory)/ascottecvkotlin.apk
     zipalign: true
 
-      - task: CopyFiles@2
+- task: CopyFiles@2
     inputs:
-    SourceFolder: $(Build.SourcesDirectory)
-    contents: '**/*.release.apk'
-    targetFolder: '$(build.artifactStagingDirectory)'
-    overWrite: true
-
-      - task: PublishBuildArtifacts@1
+      SourceFolder: $(Build.SourcesDirectory)
+      contents: '**/*.release.apk'
+      targetFolder: '$(build.artifactStagingDirectory)'
+      overWrite: true
+- task: PublishBuildArtifacts@1
     inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)/app/build/outputs/apk/release/'
-    artifactName: 'apks'
-    publishLocation: 'container'
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)/app/build/outputs/apk/release/'
+      artifactName: 'apks'
+      publishLocation: 'container'
