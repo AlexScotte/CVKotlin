@@ -35,7 +35,7 @@ steps:
     apksignerKeyPassword: $(key.password)
     apksignerArguments: --out $(outputDirectory)/ascottecvkotlin.apk
     zipalign: true
-
+    
 - task: CopyFiles@2
     inputs:
       SourceFolder: $(Build.SourcesDirectory)
