@@ -36,14 +36,14 @@ steps:
     apksignerArguments: --out $(outputDirectory)/ascottecvkotlin.apk
     zipalign: true
     
-- task: CopyFiles@2
-    inputs:
-      SourceFolder: $(Build.SourcesDirectory)
-      contents: '**/*.release.apk'
-      targetFolder: '$(build.artifactStagingDirectory)'
-      overWrite: true
-- task: PublishBuildArtifacts@1
-    inputs:
-      pathtoPublish: '$(Build.ArtifactStagingDirectory)/app/build/outputs/apk/release/'
-      artifactName: 'apks'
-      publishLocation: 'container'
+# - task: CopyFiles@2
+#     inputs:
+#       SourceFolder: $(Build.SourcesDirectory)
+#       contents: '**/*.release.apk'
+#       targetFolder: '$(build.artifactStagingDirectory)'
+#       overWrite: true
+# - task: PublishBuildArtifacts@1
+#     inputs:
+#       pathtoPublish: '$(Build.ArtifactStagingDirectory)/app/build/outputs/apk/release/'
+#       artifactName: 'apks'
+#       publishLocation: 'container'
