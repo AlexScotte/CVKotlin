@@ -29,7 +29,7 @@ steps:
   inputs:
     apkFiles: '**/*.apk'
     apksign: true
-    apksignerKeystoreFile: 'production.keystore'
+    apksignerKeystoreFile: 'cvkotlinkeystore.jks'
     apksignerKeystorePassword: $(keystore.password)
     apksignerKeystoreAlias: $(key.alias)
     apksignerKeyPassword: $(key.password)
