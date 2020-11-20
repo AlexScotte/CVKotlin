@@ -27,7 +27,7 @@ data class Company(
             rCompany.department,
             rCompany.town
     ){
-        for (rCLient in rCompany.rClients){
+        for (rCLient in rCompany.rClients.reversed()){
 
             val client = Client(rCLient)
             client.idCompany = rCLient.idCompany
